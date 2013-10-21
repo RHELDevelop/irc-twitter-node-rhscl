@@ -1,0 +1,13 @@
+{
+  "name": "irc-twitter-node",
+  "description": "A bot for irc that will post to twitter",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "dependencies": {
+    "irc": "~0.3.6",
+    "twitter": "~0.2.3"
+  }
+}
