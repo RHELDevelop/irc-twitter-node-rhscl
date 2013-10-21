@@ -6,6 +6,7 @@ lib-cov
 *.out
 *.pid
 *.gz
+twitter-secrets.js
 
 pids
 logs
@@ -13,4 +14,3 @@ results
 
 npm-debug.log
 node_modules
-twitter-secrets.js
