@@ -1,6 +1,6 @@
 {
   "name": "irc-twitter-node",
-  "description": "A bot for irc that will post to twitter",
+  "description": "A bot for irc that will work with twitter",
   "version": "0.0.1",
   "private": true,
   "scripts": {
