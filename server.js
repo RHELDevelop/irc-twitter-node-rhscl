@@ -1,6 +1,7 @@
 var irc = require('irc'), util = require('util'),
     Twit = require('twit');
 var secrets = require('./twitter-secrets');
+var preferred_channel = "#tweetme";
 
 var commands = {
 	search: function(tweeter, bot, to, string_to_search) {
@@ -24,6 +25,10 @@ var commands = {
 				};
 			}
 		});
+	},
+	help: function(bot, to, message) {
+		bot.say(to, message);
+		bot.say(to, "Try using 'followers: ' or 'search: '");
 	}
 };
 
@@ -34,10 +39,9 @@ var bot = { say: function(to, string) { console.log("TO: " + to + "; Msg: " + st
 */
 var my_bot_name= 'ircbot-' + process.pid;
 var bot = new irc.Client('chat.freenode.net', my_bot_name, {
-    channels: ['#tweetme'],
+    channels: [preferred_channel],
     debug: true
     });
-console.log("You can talk to me on #tweetme, my name is " + my_bot_name);
 
 function process_message(to, message) {
 	var arr = message.split(": ");	
@@ -50,7 +54,7 @@ function process_message(to, message) {
 	    if (commands[command]) {
 			commands[command](tweeter, bot, to, arr.join());
 		} else {
-			bot.say(to, "Try using 'followers: ' or 'search: '");
+			commands.help(bot, to, "");
 		}
 	}     
 }
@@ -61,7 +65,24 @@ process_message("followers: 1angdon");
 process_message("tweet: test from nodejs client");
 */
 
+/* not working yet
+bot.addListener('message' + preferred_channel, function (from, to, message) {
+	console.log("from: " + from + "; to: " + to + "; message: " + util.inspect(message));
+	if (to.indexOf(my_bot_name) >= 0) {
+		//switch the from to "#tweetme" so it goes in channel
+		process_message(preferred_channel, message);
+	}
+});
+*/
+
 bot.addListener('pm', function (from, message) {
     //console.log(from + ' => ME: ' + message);
     process_message(from, message);
+});
+
+bot.addListener('join', function(channel, who) {
+	if (channel == preferred_channel & who == my_bot_name) {
+		console.log("You can talk to me on " + preferred_channel + ", my name is " + my_bot_name);
+		commands.help(bot, preferred_channel, "You can talk to me on " + preferred_channel + ", my name is " + my_bot_name)
+	}
 });
