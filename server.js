@@ -34,9 +34,11 @@ var commands = {
 
 /*
 for testing
-var tweeter = new Twit(secrets.twitter_secrets);
+console.log(secrets);
+var tweeter = new Twit(secrets);
 var bot = { say: function(to, string) { console.log("TO: " + to + "; Msg: " + string); }};
 */
+
 var my_bot_name= 'ircbot-' + process.pid;
 var bot = new irc.Client('chat.freenode.net', my_bot_name, {
     channels: [preferred_channel],
@@ -44,6 +46,7 @@ var bot = new irc.Client('chat.freenode.net', my_bot_name, {
     });
 
 function process_message(to, message) {
+    if (message) {
 	var arr = message.split(": ");	
 	var command = "";
 	if (arr.length > 0) {
@@ -56,14 +59,15 @@ function process_message(to, message) {
 		} else {
 			commands.help(bot, to, "");
 		}
-	}     
+	}
+    }
 }
 /*
 for testing
+*/
 process_message("search: secret");
 process_message("followers: 1angdon");
 process_message("tweet: test from nodejs client");
-*/
 
 /* not working yet
 bot.addListener('message' + preferred_channel, function (from, to, message) {
