@@ -64,10 +64,10 @@ function process_message(to, message) {
 }
 /*
 for testing
-*/
 process_message("search: secret");
 process_message("followers: 1angdon");
 process_message("tweet: test from nodejs client");
+*/
 
 /* not working yet
 bot.addListener('message' + preferred_channel, function (from, to, message) {
