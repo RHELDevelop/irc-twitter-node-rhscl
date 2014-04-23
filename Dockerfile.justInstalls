@@ -1,0 +1,8 @@
+FROM centos
+# Install scls and nodejs
+RUN yum update -y
+RUN yum install -y centos-release-SCL
+RUN yum update -y
+RUN yum install -y scl-utils nodejs010
+# Clean up
+RUN yum clean all
