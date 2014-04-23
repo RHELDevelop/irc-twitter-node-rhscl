@@ -1,8 +1,0 @@
-FROM 1angdon/node-scl-centos
-#expost default node port
-EXPOSE  5000
-#add app
-ADD . /src
-RUN cd /src; scl enable nodejs010 "npm install"
-CMD cd /src; scl enable nodejs010 "node server.js"
-
