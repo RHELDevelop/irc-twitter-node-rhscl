@@ -1,6 +1,8 @@
-var twitter_secrets = {
-	consumer_key: 'STATE YOUR NAME',
-	consumer_secret: 'STATE YOUR NAME',
-    access_token_key: 'STATE   YOUR NAME',
-    access_token_secret: 'STATE YOUR NAME'
-    };
+module.exports = {
+    twitter_secrets : {
+	consumer_key: 'API Key',
+	consumer_secret: 'API Secret',
+	access_token: 'Access token',
+	access_token_secret: 'Access token secret'
+    }
+};
